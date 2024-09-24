@@ -2,6 +2,7 @@ import "./assets/style.css";
 import { kMeans } from "./algorithms/kMeans";
 
 let colors: Map<string, number> = new Map();
+let clusters: string[] = []
 
 // 提取颜色
 function extractColors(data: Uint8ClampedArray, count: number) {
@@ -50,7 +51,14 @@ document.getElementById("upload")?.addEventListener("change", function (event) {
           (document.getElementById("colorCount") as HTMLInputElement).value
         ) || 5;
       colors = extractColors(imageData.data, colorCount);
-      displayColors(colorCount);
+      canvas.style.visibility = "visible";
+
+      const selectedImageName = document.getElementById("selectedImageName");
+      if (selectedImageName) {
+        selectedImageName.textContent = file.name;
+      }
+      getClusters();
+      displayColors();
     }
   };
 });
@@ -59,7 +67,8 @@ const handleColorCountInput = function (this: HTMLInputElement) {
   const colorCount = parseInt(this.value);
   if (!this.value || isNaN(colorCount)) return;
   if (colors.size > 0) {
-    displayColors(colorCount);
+    getClusters();
+    displayColors();
   }
 };
 
@@ -79,38 +88,31 @@ colorCountInput?.addEventListener("input", debounce(handleColorCountInput.bind(c
 
 const addMultipleCheckbox = document.getElementById("addMultiple") as HTMLInputElement;
 addMultipleCheckbox?.addEventListener("change", function () {
-  const colorCount = parseInt(colorCountInput.value) || 5; // 确保传递的是数字
-  displayColors(colorCount);
+  getClusters();
+  displayColors();
 });
 
 const hexColorCheckbox = document.getElementById("hexColor") as HTMLInputElement;
 hexColorCheckbox?.addEventListener("change", function () {
-  const colorCount = parseInt(colorCountInput.value) || 5;
-  displayColors(colorCount);
+  displayColors();
 });
 
-function displayColors(count: number) {
-  const clusters = kMeans(colors, count, { addMultiple: addMultipleCheckbox.checked });
+function getClusters() {
+  const count = parseInt(colorCountInput.value) || 5; // 确保传递的是数字
+  clusters = kMeans(colors, count, { addMultiple: addMultipleCheckbox.checked });
+}
 
+function displayColors() {
   const colorsDiv = document.getElementById("colors");
   if (colorsDiv) {
     colorsDiv.innerHTML = "";
     clusters.forEach((color) => {
       const colorDiv = document.createElement("div");
+      colorDiv.className = "color-box"; // 设置class
       colorDiv.style.backgroundColor = color;
-      colorDiv.style.width = "150px";
-      colorDiv.style.height = "100px";
-      colorDiv.style.display = "inline-block";
-      colorDiv.style.position = "relative";
 
       const colorValue = document.createElement("span");
-      colorValue.style.color = "#fff"; // 设置文字颜色为白色以便于阅读
-      colorValue.style.position = "absolute"; // 绝对定位
-      colorValue.style.fontSize = "12px";
-      colorValue.style.width = "max-content";
-      colorValue.style.left = "50%"; // 水平居中
-      colorValue.style.top = "50%"; // 垂直居中
-      colorValue.style.transform = "translate(-50%, -50%)"; // 使文字居中
+      colorValue.className = "span"
 
       // 转换颜色为 16 进制
       if (hexColorCheckbox.checked) {

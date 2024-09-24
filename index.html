@@ -1,37 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>提取图片颜色色板</title>
   </head>
   <body>
-    <div>
+    <h3>提取图片颜色色板</h3>
+    <div style="color: #999;">ps: 色板颜色数量越多，图片颜色越丰富，计算越慢。</div>
+    <form>
+      <label for="upload" class="custom-file-upload">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.6 0-12 5.4-12 12s5.4 12 12 12 12-5.4 12-12-5.4-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z"/></svg> 选择图片
+      </label>
       <input type="file" id="upload" accept="image/*" />
-      <input
-        type="number"
-        id="colorCount"
-        value="5"
-        min="1"
-        max="100"
-        style="margin-top: 10px"
-        placeholder="设置取色数量"
-      />
-    
-      <input type="checkbox" id="addMultiple" />
-      <label for="addMultiple">多次添加同个颜色</label>
-
-      <!-- 16进制 -->
-      <input type="checkbox" id="hexColor" />
-      <label for="hexColor">16进制</label>
-    </div>
+      <div>
+        <label for="colorCount">
+          <span>色板颜色数量：</span>
+          <input
+            type="number"
+            id="colorCount"
+            value="5"
+            min="1"
+            max="20"
+            placeholder="设置取色数量"
+          />
+        </label>
+        <input type="checkbox" id="addMultiple" />
+        <label for="addMultiple">多次添加同个颜色</label>
+        <input type="checkbox" id="hexColor" />
+        <label for="hexColor">16进制</label>
+      </div>
+    </form>
     <canvas
       id="canvas"
-      width="800"
-      height="600"
-      style="max-width: 100%; height: auto"
+      style="width: 200px; visibility: hidden;"
     ></canvas>
+    <span id="selectedImageName"></span>
     <div id="colors"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>

@@ -1,0 +1,97 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4; /* 修改背景颜色为浅灰色 */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  /* 添加背景渐变效果 */
+  background: linear-gradient(135deg, #f4f4f4 0%, #e9e9e9 100%);
+}
+form {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff; /* 修改背景颜色为白色 */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* 添加边框 */
+  border: 1px solid #ddd;
+}
+input[type="file"] {
+  display: none; /* 隐藏文件输入框 */
+}
+.custom-file-upload {
+  display: flex;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  border-radius: 20px;
+  background-color: #007bff; /* 设置背景颜色为蓝色 */
+  color: white; /* 设置文字颜色为白色 */
+  font-size: 16px;
+  font-weight: bold;
+  align-items: center;
+  gap: 10px;
+  &:hover {
+    background-color: #0056b3; /* 修改背景颜色为深蓝色 */
+  }
+}
+input[type="number"] {
+  padding: 5px;
+  margin-top: 10px;
+  border: 1px solid #ccc; /* 修改边框颜色为浅灰色 */
+  border-radius: 5px;
+  font-size: 16px;
+}
+input[type="checkbox"] {
+  margin-right: 5px;
+  transform: scale(1.5);
+  /* 添加hover效果 */
+  &:hover {
+    transform: scale(1.6); /* 修改缩放比例 */
+  }
+}
+label {
+  display: inline-block;
+  margin-right: 20px;
+  font-size: 16px;
+}
+#canvas {
+  max-width: 100%;
+  height: auto;
+  margin: 20px;
+  border: 1px solid #ddd; /* 修改边框颜色为浅灰色 */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+#colors {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px;
+}
+
+.color-box {
+  width: 150px;
+  height: 100px;
+  display: inline-block;
+  position: relative;
+  border-radius: 6px;
+}
+
+.color-box span {
+  color: #fff; /* 设置文字颜色为白色以便于阅读 */
+  position: absolute; /* 绝对定位 */
+  font-size: 12px;
+  width: max-content;
+  left: 50%; /* 水平居中 */
+  top: 50%; /* 垂直居中 */
+  transform: translate(-50%, -50%); /* 使文字居中 */
+}
