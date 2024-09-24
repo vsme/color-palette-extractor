@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+  </head>
+  <body>
+    <div>
+      <input type="file" id="upload" accept="image/*" />
+      <input
+        type="number"
+        id="colorCount"
+        value="5"
+        min="1"
+        max="100"
+        style="margin-top: 10px"
+        placeholder="设置取色数量"
+      />
+    
+      <input type="checkbox" id="addMultiple" />
+      <label for="addMultiple">多次添加同个颜色</label>
+
+      <!-- 16进制 -->
+      <input type="checkbox" id="hexColor" />
+      <label for="hexColor">16进制</label>
+    </div>
+    <canvas
+      id="canvas"
+      width="800"
+      height="600"
+      style="max-width: 100%; height: auto"
+    ></canvas>
+    <div id="colors"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
